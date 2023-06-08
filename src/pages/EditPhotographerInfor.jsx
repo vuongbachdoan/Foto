@@ -85,7 +85,7 @@ const EditPhotographerInfor = () => {
     }
 
     useEffect(() => {
-        getPhotographer(localStorage.getItem("userId"))
+        getPhotographer(auth.currentUser.uid)
             .then((res) => {
                 setFirstName(res.firstName);
                 setLastName(res.lastName);

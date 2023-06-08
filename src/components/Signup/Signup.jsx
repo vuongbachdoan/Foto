@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../Signup/Signup.css"
 import SelectionDropdown from "../SelectionDropdown/SelectionDropdown";
-import { auth, registerWithEmailAndPassword } from "../../shared/firebase/firebase";
+import { auth, logout, registerWithEmailAndPassword } from "../../shared/firebase/firebase";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const select = {
@@ -33,9 +33,11 @@ const Signup = () => {
             logout(),
             registerWithEmailAndPassword(firstName, lastName, email, password, role)
                 .then((res) => {
-                    Promise.all([
-                        navigate(`/personal/${auth.currentUser.uid}/edit`)
-                    ])
+                        if(role == "Thợ chụp ảnh cần tìm kiếm khách hàng") {
+                            navigate(`/personal/${auth.currentUser.uid}/edit`)
+                        } else {
+                            navigate(`/personal/${auth.currentUser.uid}`)
+                        }
                 })
         ])
     }

@@ -87,7 +87,6 @@ const registerWithEmailAndPassword = async (
         .then(
             (result) => {
                 const user = result.user;
-                console.log(user)
                 if (role == "Thợ chụp ảnh cần tìm kiếm khách hàng") {
                     addDoc(collection(db, 'photographer'), {
                         uid: user.uid,
