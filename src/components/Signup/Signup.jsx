@@ -29,12 +29,15 @@ const Signup = () => {
     const navigate = useNavigate();
     const handleSignUp = (e) => {
         e.preventDefault();
-        registerWithEmailAndPassword(firstName, lastName, email, password, role)
-            .then((res) => {
-                Promise.all([
-                    navigate(`/personal/${auth.currentUser.uid}/edit`)
-                ])
-            })
+        Promise.all([
+            logout(),
+            registerWithEmailAndPassword(firstName, lastName, email, password, role)
+                .then((res) => {
+                    Promise.all([
+                        navigate(`/personal/${auth.currentUser.uid}/edit`)
+                    ])
+                })
+        ])
     }
     return (
         <form className="signup">
